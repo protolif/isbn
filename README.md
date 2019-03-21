@@ -1,20 +1,35 @@
 isbn
 ====
 
-Version 2.0
+Version 3.0
 
 ## Introduction
 
-This library provides methods to manipulate isbns. As of version 2.0 there has been a near complete rewrite of this library but this time there are tests. A few methods have been removed. Here is what remains:
+This library provides methods to manipulate ISBNs. As of version 2.0 there has been a near complete rewrite of this library but this time there are tests. A few methods have been removed. Here is what remains:
 
-## Prerequisites
+## Prerequisites: 0
 
- It depends on the LibJpeg and Gocr libraries. Recommended [Homebrew](http://github.com/mxcl/homebrew).
+ISBN.from_image has been deprecated as of version 3.0.
+OCR dependencies have been removed to make this a stand-alone library.
 
-```
-brew install libjpeg
-brew install gocr
-```
+
+Recommendation:
+
+Support barcode reading via Zbar, a lightweight, cross-platform, C library,
+with LGPLv2 licensing. It will return a string for use with ISBN.from_string
+
+  $ sudo yum install zbar            # on RedHat or CentOS (EPEL repo)
+  $ sudo apt-get install libzbar0    # on Debian or Ubuntu
+  $ sudo emerge zbar                 # on Gentoo
+  $ brew install zbar                # on Mac OS X with Homebrew
+  $ brew install zbar                # on Windows 10 (WSL) with Linuxbrew
+
+It even has a convenient ruby wrapper.
+
+https://rubygems.org/gems/zbar
+
+However, not every application of ISBN necessitates OCR, so we should not depend on it.
+This feature may be re-released as a separate gem at a later date.
 
 ## Installing ISBN
 
@@ -58,5 +73,5 @@ gem install isbn
 
 * `ISBN.from_image` accept a jpeg of an isbn and OCR it into an isbn.
     - it depends on the LibJpeg and Gocr libraries. I recommend [Homebrew](http://github.com/mxcl/homebrew).
- 
+
 * `ISBN.from_string` fetches isbn from string
